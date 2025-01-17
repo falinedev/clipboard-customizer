@@ -34,7 +34,8 @@ def process_clipboard():
         current_text = pyperclip.paste()
         if current_text != previous_text:
             previous_text = current_text
-            cleaned_text = remove_markdown_syntax(current_text)
+            syntax_free_text = remove_markdown_syntax(current_text)
+            cleaned_text = remove_newline_whitespace(syntax_free_text)
             pyperclip.copy(cleaned_text)
         time.sleep(0.5)
 
