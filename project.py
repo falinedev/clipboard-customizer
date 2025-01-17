@@ -1,20 +1,32 @@
 import time
 import pyperclip
 
-def remove(text):
+def remove_markdown_syntax(s):
     replacements = [
-        ("**", ""),  # Bold
-        ("*", ""),   # Italics
-        ("__", ""),  # Bold (alternative)
-        ("_", ""),   # Italics (alternative)
-        ("`", ""),   # Inline code
-        ("#", ""),   # Headers
-        ("-", ""),   # List items
-        (">", ""),   # Blockquotes
+        ("**"),
+        ("*"),
+        ("__"),
+        ("_"),
+        ("```"),
+        ("`"),
+        ("#"),
+        ("## "),
+        ("- "),
+        ("> "),
+        ("~~"),
     ]
-    for original, plain in replacements:
-        text = text.replace(original, plain)
-    return text.strip()
+    for i in replacements:
+        s = s.replace(i, "")
+    return s.strip().lstrip()
+
+def remove_newline_whitespace(s):
+    lines = s.splitlines()
+    new_lines = []
+    for line in lines:
+        new_line = line.strip()
+        new_lines.append(new_line)
+    return "\n".join(str(item) for item in new_lines)
+
 
 def process_clipboard():
     previous_text = ""
@@ -22,7 +34,7 @@ def process_clipboard():
         current_text = pyperclip.paste()
         if current_text != previous_text:
             previous_text = current_text
-            cleaned_text = remove(current_text)
+            cleaned_text = remove_markdown_syntax(current_text)
             pyperclip.copy(cleaned_text)
         time.sleep(0.5)
 
@@ -30,7 +42,7 @@ def main():
     try:
         process_clipboard()
     except KeyboardInterrupt:
-        sys.exit
+        print('Program exited.')
 
 if __name__ == "__main__":
     main()
