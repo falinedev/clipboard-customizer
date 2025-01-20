@@ -1,25 +1,25 @@
+import re
 import time
 import pyperclip
 
-def remove_markdown_syntax(s):
+def clean_markdown(s):
     replacements = [
         ("**"),
         ("*"),
         ("__"),
         ("_"),
-        ("```"),
         ("`"),
         ("#"),
-        ("## "),
         ("- "),
         ("> "),
         ("~~"),
+        ("---")
     ]
     for i in replacements:
         s = s.replace(i, "")
     return s.strip().lstrip()
 
-def remove_newline_whitespace(s):
+def clean_lines(s):
     lines = s.splitlines()
     new_lines = []
     for line in lines:
@@ -28,14 +28,20 @@ def remove_newline_whitespace(s):
     return "\n".join(str(item) for item in new_lines)
 
 
+def clean_links(s):
+    match = re.search(f".*(http.+|https.+).*", s)
+    if match:
+        return match[1].replace(')', "")
+
+
 def process_clipboard():
+    print("Program is running...\n\nPress CTRL+C to exit.")
     previous_text = ""
     while True:
         current_text = pyperclip.paste()
-        if current_text != previous_text:
+        if current_text != previous_text: 
             previous_text = current_text
-            syntax_free_text = remove_markdown_syntax(current_text)
-            cleaned_text = remove_newline_whitespace(syntax_free_text)
+            cleaned_text = clean_lines(clean_markdown(clean_links(current_text)))
             pyperclip.copy(cleaned_text)
         time.sleep(0.5)
 
