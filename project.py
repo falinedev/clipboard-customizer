@@ -68,11 +68,14 @@ def process_clipboard():
     print("Program is running...\n\nTo exit the program, press CTRL+C.")
     previous_text = ""
     while True:
-        current_text = pyperclip.paste()
-        if current_text != previous_text:
-            previous_text = current_text
-            cleaned_text = clean_lines(clean_markdown(clean_links(current_text)))
-            pyperclip.copy(cleaned_text)
+        try:
+            current_text = pyperclip.paste()
+            if current_text != previous_text:
+                previous_text = current_text
+                cleaned_text = clean_lines(clean_markdown(clean_links(current_text)))
+                pyperclip.copy(cleaned_text)
+        except pyperclip.PyperclipWindowsException:
+            exit('\nTimed out...')
         time.sleep(0.5)
 
 def main():
