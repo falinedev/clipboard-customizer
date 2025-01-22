@@ -1,6 +1,4 @@
-# Simple Markdown to Plaintext Extractor
-
-#### Video Demo:
+# pasteMOds
 
 ### Description
 
