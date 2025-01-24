@@ -75,7 +75,7 @@ def process_clipboard():
                 cleaned_text = clean_lines(clean_markdown(clean_links(current_text)))
                 pyperclip.copy(cleaned_text)
         except pyperclip.PyperclipWindowsException:
-            exit('\nTimed out...')
+            exit('\nTimed out...') # Handles termination caused by Windows sleep mode.
         time.sleep(0.5)
 
 def main():
