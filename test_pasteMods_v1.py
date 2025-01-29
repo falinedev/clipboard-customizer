@@ -1,4 +1,4 @@
-from project import clean_links, clean_lines, clean_markdown
+from pasteMods_v1 import clean_links, clean_lines, clean_markdown
 
 def test_clean_links():
     assert clean_links('![Logo](https://website.com)') == 'https://website.com'

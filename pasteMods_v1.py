@@ -4,13 +4,7 @@ import pyperclip
 
 def clean_markdown(s):
     """
-    Removes common Markdown syntax (e.g., **, *, __, _, #, -) from the input string.
-
-    Args:
-        s (str): Input string with Markdown formatting.
-
-    Returns:
-        str: Plaintext string with Markdown removed.
+    Removes common Markdown syntax from the input string.
     """
     replacements = [
         ("**"),
@@ -31,12 +25,6 @@ def clean_markdown(s):
 def clean_links(s):
     """
     Extracts and returns URLs from Markdown links and image syntax.
-
-    Args:
-        s (str): Input string with Markdown links or images.
-
-    Returns:
-        str: String with only URLs extracted.
     """
     cleaned = re.sub(r'!\[.*?\]\((https?://[^\)]+)\)|\[(.*?)\]\((https?://[^\)]+)\)', r'\1\3', s)
     return cleaned
@@ -44,12 +32,6 @@ def clean_links(s):
 def clean_lines(s):
     """
     Strips extra spaces from each line in the input string.
-
-    Args:
-        s (str): Input string with multiple lines.
-
-    Returns:
-        str: String with lines cleaned of leading/trailing spaces.
     """
     lines = s.splitlines()
     new_lines = []
@@ -61,9 +43,7 @@ def clean_lines(s):
 
 def process_clipboard():
     """
-    Monitors the clipboard, cleans text when it changes, and updates the clipboard.
-
-    The program runs in a loop and processes the clipboard content every 0.5 seconds.
+    Monitors the clipboard every 0.5 seconds, cleans changes, and updates the clipboard.
     """
     print("Program is running...\n\nTo exit the program, press CTRL+C.")
     previous_text = ""
@@ -79,9 +59,7 @@ def process_clipboard():
         time.sleep(0.5)
 
 def main():
-    """
-    Starts clipboard monitoring and handles program exit with CTRL+C.
-    """
+
     try:
         process_clipboard()
     except KeyboardInterrupt:
