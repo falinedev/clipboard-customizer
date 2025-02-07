@@ -1,4 +1,4 @@
-# pasteMOds
+# pasteMods
 
 ### Description
 
