@@ -20,3 +20,6 @@ python pasteMods.py
 ```
 
 **pasteMods** runs in the background, cleaning clipboard content every 0.5 seconds. Press **CTRL+C** to exit.
+
+## Run
+To run the program on Windows, execute the file located at app/pastMods.exe.
