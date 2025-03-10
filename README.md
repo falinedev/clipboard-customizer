@@ -1,6 +1,6 @@
-# pasteMods
+# Clipboard Customizer
 
-A Python exercise that customizes clipboard content by removing Markdown formatting, extracting links, and cleaning up text automatically.
+A Python exercise that customizes clipboard content by removing certain Markdown characters.
 
 ## Requirements
 
